@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Romasssshka96/marvelReactApp_changeToHooks.git/static/css/main.eec2a7ab.css",
-    "main.js": "/Romasssshka96/marvelReactApp_changeToHooks.git/static/js/main.de687d95.js",
-    "static/media/7iJI.gif": "/Romasssshka96/marvelReactApp_changeToHooks.git/static/media/7iJI.ca9d625c59f35fbf66ec.gif",
-    "static/media/vision.png": "/Romasssshka96/marvelReactApp_changeToHooks.git/static/media/vision.067d4ae1936d64a577ce.png",
-    "static/media/mjolnir.png": "/Romasssshka96/marvelReactApp_changeToHooks.git/static/media/mjolnir.61f31e1809f12183a524.png",
-    "static/media/img-not-found.jpg": "/Romasssshka96/marvelReactApp_changeToHooks.git/static/media/img-not-found.85d8d1eda7f078792068.jpg",
-    "index.html": "/Romasssshka96/marvelReactApp_changeToHooks.git/index.html",
-    "main.eec2a7ab.css.map": "/Romasssshka96/marvelReactApp_changeToHooks.git/static/css/main.eec2a7ab.css.map",
-    "main.de687d95.js.map": "/Romasssshka96/marvelReactApp_changeToHooks.git/static/js/main.de687d95.js.map"
+    "main.css": "/marvelReactApp_changeToHooks/static/css/main.eec2a7ab.css",
+    "main.js": "/marvelReactApp_changeToHooks/static/js/main.2ae52978.js",
+    "static/media/7iJI.gif": "/marvelReactApp_changeToHooks/static/media/7iJI.ca9d625c59f35fbf66ec.gif",
+    "static/media/vision.png": "/marvelReactApp_changeToHooks/static/media/vision.067d4ae1936d64a577ce.png",
+    "static/media/mjolnir.png": "/marvelReactApp_changeToHooks/static/media/mjolnir.61f31e1809f12183a524.png",
+    "static/media/img-not-found.jpg": "/marvelReactApp_changeToHooks/static/media/img-not-found.85d8d1eda7f078792068.jpg",
+    "index.html": "/marvelReactApp_changeToHooks/index.html",
+    "main.eec2a7ab.css.map": "/marvelReactApp_changeToHooks/static/css/main.eec2a7ab.css.map",
+    "main.2ae52978.js.map": "/marvelReactApp_changeToHooks/static/js/main.2ae52978.js.map"
   },
   "entrypoints": [
     "static/css/main.eec2a7ab.css",
-    "static/js/main.de687d95.js"
+    "static/js/main.2ae52978.js"
   ]
 }
