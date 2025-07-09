@@ -3,45 +3,36 @@ import Spinner from '../spiner/spiner';
 import ErrorMsg from '../errorMsg/errorMsg';
 import imgNotFound from '../../resources/img/img-not-found.jpg'
 import './randomChar.scss';
-import MarvelService from '../../services/MarvelServices';
+import useMarvelService from '../../services/MarvelServices';
 import mjolnir from '../../resources/img/mjolnir.png';
+
 
 const RandomChar =()=> {
 
-        
-    
     
     const [char, setChar] = useState({})
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
-        
-    
 
-    
-    const marvelService = new MarvelService()
+    const {loading, error, getOneCharacter, clearError} = useMarvelService()
+
+   
 
     useEffect(()=>{
         updateCharacter();
-        console.log('MOUNT')
     }, [])
   
 
-  
-
-
     const onCharLoaded = (char) =>{
         setChar(char);
-        setLoading(false)
     }
 
     const updateCharacter = ()=>{
+        clearError();
         const id = Math.floor(Math.random()* (20 - 1));
-        console.log(id)
+        //console.log(id)
 
-        marvelService
-        .getOneCharacter(id)
+        getOneCharacter(id)
         .then(onCharLoaded)
-        .catch(onError)
+        
     }
 
     const altImg = () =>{
@@ -53,22 +44,13 @@ const RandomChar =()=> {
         })))
     }
 
-    const onError = () => {
-        setLoading(false)
-        setError(true)
-
-    }
-
-
-
-
 
 
         console.log('render')
         
         const errMsg = error? <ErrorMsg/> : null;
         const spiner = loading? <Spinner/> : null;
-        const content = !(loading || error)? <Viwe char={char}/>: null;
+        const content = !(loading || error)? <Viwe char={char} altImg={altImg}/>: null;
        
             return (
         <div className="randomchar">
@@ -100,7 +82,7 @@ const Viwe = ({char}) => {
 
     const {name, description, src, homepage, wiki} = char
 
-    //const img = src || imgNotFound ;
+
 
 
     return (

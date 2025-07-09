@@ -1,6 +1,6 @@
 import { CuseState, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import MarvelService from '../../services/MarvelServices';
+import useMarvelService from '../../services/MarvelServices';
 import CharInfoItem from '../CharInfoItem/CharInfoItem';
 import Spinner from '../spiner/spiner';
 import ErrorMsg from '../errorMsg/errorMsg';
@@ -12,11 +12,8 @@ import './charInfo.scss';
 const CharInfo = (props)=> {
     
         const [char, setChar ] = useState(null)
-        const [loading, setLoading] = useState(false)
-        const [error, setError] = useState(false)
     
-    
-        const mService = new MarvelService()
+        const {loading, error, getOneCharacter, clearError} = useMarvelService()
 
        
 
@@ -35,36 +32,28 @@ const CharInfo = (props)=> {
     //}
 
     const updateChar = () =>{
+        clearError()
         const {charId} = props
 
             if(!charId){
                 return
             }
             
-            onCharLoading();
-
-            mService
-            .getOneCharacter(charId)
+            getOneCharacter(charId)
             .then(onCharLoaded)
-            .catch(onError)
+            
 
             // this.foo.bar = 0  //искуственная ошибка для проверки err boundry
         }
 
-    const onCharLoading = () => {
-        setLoading(true)
-    }
+
     
     const onCharLoaded = (char) =>{
         setChar(char)
-        setLoading(false)
 
     }
 
-    const onError = () => {
-        setLoading(false);
-        setError(true);
-    }
+
 
 
 

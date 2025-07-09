@@ -28,7 +28,7 @@ const  CharListItem = (props)=> {
         }}
         >
 
-            <img onError={e =>{
+            <img onError={e =>{             //функция которая вставлет картинку заглушку если с сервера она не приходит 
                 e.target.onerror = null;
                 e.target.src = imgNotFound
             }}

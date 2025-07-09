@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import MarvelService from '../../services/MarvelServices';
+import useMarvelService from '../../services/MarvelServices';
 import CharListItem from '../CharListItem/CharListItem';
 import Spinner from '../spiner/spiner';
 import ErrorMsg from '../errorMsg/errorMsg';
@@ -10,40 +10,35 @@ import './charList.scss';
 const CharList =(props)=> {
 
             const [cards, setCards] = useState([]) ;
-            const [loading, setLoading] = useState(false) ;
-            const [error, setError] = useState(false) ;
             const [newItemsLoading, setNewItemsLoading] = useState(false) ;
             const [offset, setOffset] = useState(0) ;
             const [charEnded, setCharEnded] = useState(false) ;
             const [activeId, setActiveId] = useState(null);
 
 
-    const marvelService = new MarvelService();
+    const {loading, error, getAllCharacters} = useMarvelService();
+
 
     useEffect(()=>{
-        onRequest()
+        onRequest(offset, true)
     }, [])
 
 
-    const onRequest = (offset) => {
-        onCharListLoading();
-        marvelService.getAllCharacters(offset)
+    const onRequest = (offset, initial) => {
+        initial? setNewItemsLoading(false): setNewItemsLoading(true)
+        
+        getAllCharacters(offset, props.page)
         .then(onCharListLoaded)
-        .catch(onError);
         
     }
 
 
 
-    const onCharLoading = () => {
-            setLoading = true
-        
-    }
+    //const onCharLoading = () => {
+    //        setLoading = true
+    //    
+    //}
 
-    const onCharListLoading = () => {
-        setNewItemsLoading(true)
-       
-    }
 
     const onCharListLoaded = (newCards) => {
 
@@ -52,7 +47,7 @@ const CharList =(props)=> {
             ended= true
         }
             setCards (cards => [...cards, ...newCards]) ;
-            setLoading (false) ;// везде колбек функции, а тут просто назначение стейта, потому что тут неважно какой был стейт до этого 
+            //setLoading (false) ;// везде колбек функции, а тут просто назначение стейта, потому что тут неважно какой был стейт до этого 
             setNewItemsLoading (newItemsLoading => false) ;
             setOffset (offset => offset + 9) ;
             setCharEnded (charEnded => ended) ;
@@ -65,11 +60,7 @@ const CharList =(props)=> {
         
     }
     
-    const onError = () => {
-        
-            setLoading(false) ;
-            setError(true) ;
-    }
+
     
     const onCharActive = (id) =>{
         setActiveId (id);
@@ -81,16 +72,17 @@ const CharList =(props)=> {
         
         
         const errMsg = error? <ErrorMsg/> : null;
-        const spiner = loading? <Spinner/> : null;
-        const content = !(loading || error)? <Viwe cards={cards} onCharSelected={onCharSelected} onCharActive={onCharActive} activeId={activeId}/>: null;
+        const spiner = loading && !newItemsLoading? <Spinner/> : null;
+        //const content = !(loading || error)? <Viwe cards={cards} onCharSelected={onCharSelected} onCharActive={onCharActive} activeId={activeId}/>: null;
  
-
+        console.log('charList!')
         return (
                 <div className="char__list">
             <ul className="char__grid">
                 {spiner}
                 {errMsg}
-                {content}
+             {/*   {content}*/}
+             <Viwe cards={cards} onCharSelected={onCharSelected} onCharActive={onCharActive} activeId={activeId}/>
             </ul>
 
             <button 
